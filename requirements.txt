@@ -4,3 +4,4 @@ Pillow
 google.generativeai
 gunicorn
 django
+whitenoise>=6.6.0
