@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Admin Dashboard - {{ today }}</h2>
+
+<!-- Top Cards -->
+<div class="row mb-4">
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-primary shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Total Students</h5>
+        <p class="card-text fs-4">{{ total_students }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-success shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Present Today</h5>
+        <p class="card-text fs-4">{{ present_today }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-danger shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Absent Today</h5>
+        <p class="card-text fs-4">{{ absent_today }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Attendance Table -->
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Student Attendance</h5>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Student Name</th>
+            <th>Roll Number</th>
+            <th>Attendance Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in attendance_records %}
+          <tr>
+            <td>{{ record.student_name }}</td>
+            <td>{{ record.roll_number }}</td>
+            <td>{{ record.attendance_date }}</td>
+            <td>
+              {% if record.status == "Present" %}
+              <span class="badge bg-success">Present</span>
+              {% else %}
+              <span class="badge bg-danger">Absent</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" class="text-center">No records found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'students/base.html' %}
+{% block content %}
+<div class="alert alert-info">{{ message }}</div>
+<h4>Your Token (for QR/link marking)</h4>
+<p>Share this link privately or scan QR (do not share publicly):</p>
+<pre>{{ request.build_absolute_uri|slice:':-1' }}mark/{{ request.user.studentprofile.token }}/</pre>
+{% endblock %}

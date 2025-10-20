@@ -1,0 +1,8 @@
+{% extends 'students/base.html' %}
+{% block content %}
+<div class="alert alert-success">{{ message }}</div>
+{% if student %}
+  <h5>{{ student.full_name }} ({{ student.roll_number }})</h5>
+  <p>DOB: {{ student.dob }} | Father: {{ student.father_name }} | Phone: {{ student.phone }}</p>
+{% endif %}
+{% endblock %}

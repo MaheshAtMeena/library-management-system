@@ -1,0 +1,134 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+<style>
+  .card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    border: none;
+  }
+
+  h3.text-primary {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  form label {
+    font-size: 0.95rem;
+    color: #495057;
+  }
+
+  form input,
+  form select,
+  form textarea {
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+    border: 1px solid #ced4da !important;
+    font-size: 0.95rem;
+    width: 100%;
+    background-color: #fafafa;
+    transition: all 0.2s ease;
+  }
+
+  form input:focus,
+  form select:focus,
+  form textarea:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15) !important;
+    background-color: #fff;
+  }
+
+  form h5 {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-divider {
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 1rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .btn-success {
+    background: linear-gradient(90deg, #28a745, #2ecc71);
+    border: none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .btn-success:hover {
+    background: linear-gradient(90deg, #218838, #27ae60);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-danger.small {
+    font-size: 0.85rem;
+  }
+
+  .card-body {
+    padding: 40px 45px;
+  }
+
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 25px;
+    }
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-center mb-4 text-primary">Register Student</h3>
+
+        <form method="post">
+          {% csrf_token %}
+
+          <!-- Account Section -->
+          <div class="mb-3">
+            <h5 class="section-divider">Account Details</h5>
+          </div>
+
+          {{ uform.non_field_errors }}
+          {% for field in uform %}
+          <div class="mb-3">
+            <label class="form-label fw-medium">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="text-danger small mt-1">{{ field.errors|join:", " }}</div>
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          <!-- Profile Section -->
+          <div class="mb-3 mt-4">
+            <h5 class="section-divider">Profile Details</h5>
+          </div>
+
+          {{ pform.non_field_errors }}
+          {% for field in pform %}
+          <div class="mb-3">
+            <label class="form-label fw-medium">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="text-danger small mt-1">{{ field.errors|join:", " }}</div>
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          <!-- Submit Button -->
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success shadow-sm">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
